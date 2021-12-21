@@ -1,0 +1,59 @@
+﻿@model Abordo.Models.Cadastrar;
+@{
+    ViewData["Title"] = "Cadastrar";
+    var Cadastrars = ViewData["Cadastrars"] as List<Cadastrar>;
+
+}
+<h1>Cadastro Cliente</h1>
+
+<div class="container">
+    <div class="row">
+        <!--row vai se comportar como uma linha-->
+        <dv class="col-md-5">
+            <h2>Clientes Cadastrados</h2>
+            <div class="table-responsive">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="th-lg">Id</th>
+                            <th class="th-lg">Nome</th>
+                            <th class="th-lg">CPF</th>
+                            <th class="th-lg">Nascimento</th>
+                            <th class="th-lg">CEP</th>
+                            <th class="th-lg">Bairro</th>
+                            <th class="th-lg">Endereço</th>
+                            <th class="th-lg">Nº</th>
+                            <th class="th-lg">Celular</th>
+                            <th class="th-lg">Email</th>
+                            <th class="th-lg">Situação</th>
+                        </tr>
+                    </thead>
+                    <!--corpo da tabela-->
+                    <tbody>
+                        <!--inserindo codigo c# no codigo html-->
+                        @{
+                            foreach (var cadastrar in Cadastrars)
+                            {
+                                <tr>
+                                    <td>@cadastrar.IdCli</td>
+                                    <td>@cadastrar.NomeCli</td>
+                                    <td>@cadastrar.CPFCli</td>
+                                    <td>@cadastrar.NasCli</td>
+                                    <td>@cadastrar.CEPCli</td>
+                                    <td>@cadastrar.BairroCli</td>
+                                    <td>@cadastrar.EnderecoCli</td>
+                                    <td>@cadastrar.NumeroCli</td>
+                                    <td>@cadastrar.TelefoneCli</td>
+                                    <td>@cadastrar.EmailCli</td>
+                                    <td>@cadastrar.Situacao</td>
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+    </div>
+</div>

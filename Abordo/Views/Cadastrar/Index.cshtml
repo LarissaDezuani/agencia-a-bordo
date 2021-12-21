@@ -1,0 +1,256 @@
+﻿@model Abordo.Models.Cadastrar;
+@{
+    ViewData["Title"] = "Cadastrar";
+    var Cadastrars = ViewData["Cadastrars"] as List<Cadastrar>;
+
+}
+
+<!--Cadasatrar Clientes-->
+
+<h2>Cadastrar </h2>
+<form asp-action="Index">
+    <div class="shadow-lg  p-3 mb-5 bg-white rounded mx-auto" style=" margin-top: 10%; color: #000; ">
+        <!--msm nome public IActionResult Incluir(Clie-->
+        <div class="form-row">
+
+            <div class="form-group col-md-6">
+                <label for="">Nome</label>
+                <input asp-for="NomeCli" type="text" class="form-control" id="">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="">CPF</label>
+                <input asp-for="CPFCli" type="text" class="form-control" id="">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="">Nascimento</label>
+                <input asp-for="NasCli" type="data" class="form-control" id="">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="">CEP</label>
+                <input asp-for="CEPCli" type="data" class="form-control" id="">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="">Bairro</label>
+                <input asp-for="BairroCli" type="data" class="form-control" id="">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="">Endereço</label>
+                <input asp-for="EnderecoCli" type="data" class="form-control" id="">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="">Número</label>
+                <input asp-for="NumeroCli" type="data" class="form-control" id="">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="">Telefone</label>
+                <input asp-for="TelefoneCli" type="data" class="form-control" id="">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="">E-mail</label>
+                <input asp-for="EmailCli" type="data" class="form-control" id="">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for""> Situação </label>
+                <select class="custom-select" asp-for="Situacao">
+                    <option selected>-- Selecione uma opção></option>
+                    <option>Ativo</option>
+                    <option>Inativo</option>
+                    <option>Bloqueado</option>
+                </select>
+            </div>
+            <div class="">
+                <button type="submit" class="btn btn-outline-dark">Enviar</button>
+                <!--botao editar-->
+                <button type="button" class="btn btn-dark" data-toggle="modal" data-target=".bd-example-modal-lg">Editar</button>
+                <!--botao excluir-->
+            </div>
+        </div>
+        <!-- Modal -->
+
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>-->
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h2>Clientes Cadastrados</h2>
+                        <div class="table-responsive">
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nome</th>
+                                        <th>CPF</th>
+                                        <th>Nascimento</th>
+                                        <th>CEP</th>
+                                        <th>Bairro</th>
+                                        <th>Endereço</th>
+                                        <th>Nº</th>
+                                        <th>Celular</th>
+                                        <th>Email</th>
+                                        <th>Situação</th>
+                                    </tr>
+                                </thead>
+                                <!--corpo da tabela-->
+                                <tbody>
+                                    <!--inserindo codigo c# no codigo html-->
+                                    @{
+                                        foreach (var cadastrar in Cadastrars)
+                                        {
+                                            <tr>
+                                                <td>@cadastrar.IdCli</td>
+                                                <td>@cadastrar.NomeCli</td>
+                                                <td>@cadastrar.CPFCli</td>
+                                                <td>@cadastrar.NasCli</td>
+                                                <td>@cadastrar.CEPCli</td>
+                                                <td>@cadastrar.BairroCli</td>
+                                                <td>@cadastrar.EnderecoCli</td>
+                                                <td>@cadastrar.NumeroCli</td>
+                                                <td>@cadastrar.TelefoneCli</td>
+                                                <td>@cadastrar.EmailCli</td>
+                                                <td>@cadastrar.Situacao</td>
+                                            </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+
+
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <!-- <button type="button" class="btn btn-primary">Save changes</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- fim Cadasatrar Clientes-->
+
+<h2>Atualizar Dados</h2>
+<form asp-controller="Cadastrar" asp-action="Atualizar">
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="">Código do cliente</label>
+            <select class="custom-select" asp-for="IdCli">
+                <option selected>-- Selecione um código</option>
+                @{
+                    foreach (var cadastrar in Cadastrars)
+                    {
+                        <option>@cadastrar.IdCli</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="">Nome</label>
+            <input asp-for="NomeCli" type="text" class="form-control" id="">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="">CPF</label>
+            <input asp-for="CPFCli" type="text" class="form-control" id="">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="">Nascimento</label>
+            <input asp-for="NasCli" type="data" class="form-control" id="">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="">CEP</label>
+            <input asp-for="CEPCli" type="data" class="form-control" id="">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="">Bairro</label>
+            <input asp-for="BairroCli" type="data" class="form-control" id="">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="">Endereço</label>
+            <input asp-for="EnderecoCli" type="data" class="form-control" id="">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="">Número</label>
+            <input asp-for="NumeroCli" type="data" class="form-control" id="">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="">Telefone</label>
+            <input asp-for="TelefoneCli" type="data" class="form-control" id="">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="">E-mail</label>
+            <input asp-for="EmailCli" type="data" class="form-control" id="">
+        </div>
+        <div class="form-group col-md-6">
+            <label for""> Situação </label>
+            <select class="custom-select" asp-for="Situacao">
+                <option selected>-- Selecione uma opção></option>
+                <option>Ativo</option>
+                <option>Inativo</option>
+                <option>Bloqueado</option>
+            </select>
+        </div>
+
+    </div>
+    <button type="submit" class="btn btn-outline-dark">Atualizar</button>
+</form>
+
+
+<h2>Deletar</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Nascimento</th>
+            <th>CEP</th>
+            <th>Bairro</th>
+            <th>Endereço</th>
+            <th>Nº</th>
+            <th>Celular</th>
+            <th>Email</th>
+            <th>Situação</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var cadastrar in Cadastrars)
+            {
+                <tr>
+                    <td>@cadastrar.IdCli</td>
+                    <td>@cadastrar.NomeCli</td>
+                    <td>@cadastrar.CPFCli</td>
+                    <td>@cadastrar.NasCli</td>
+                    <td>@cadastrar.CEPCli</td>
+                    <td>@cadastrar.BairroCli</td>
+                    <td>@cadastrar.EnderecoCli</td>
+                    <td>@cadastrar.NumeroCli</td>
+                    <td>@cadastrar.TelefoneCli</td>
+                    <td>@cadastrar.EmailCli</td>
+                    <td>@cadastrar.Situacao</td>
+
+                    <td>
+                        <form asp-controller="Cadastrar" asp-action="Deletar">
+                            <button class="btn btn-danger" type="submit">x deletar</button>
+                            <input asp-for="IdCli" style="visibility:hidden;" type="text" value="@cadastrar.IdCli">
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+
+

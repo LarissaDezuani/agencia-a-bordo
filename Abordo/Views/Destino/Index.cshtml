@@ -1,0 +1,202 @@
+﻿@model Abordo.Models.Destino;
+@{
+    ViewData["Title"] = "Destino";
+    var Destinos = ViewData["Destinos"] as List<Destino>;
+
+}
+
+
+<h1>Cadastro Cliente</h1>
+
+<!--Cadasatrar Clientes-->
+
+<h2>Cadastrar</h2>
+<form asp-action="Index">
+    <div class="shadow-lg  p-3 mb-5 bg-white rounded mx-auto" style=" margin-top: 10%; color: #000; ">
+        <!--msm nome public IActionResult Incluir(Clie-->
+        <div class="form-row">
+
+            <div class="form-group col-md-6">
+                <label for"">Informe o CPF</label>
+                <input asp-for="CPFCli" type="text" class="form-control" id="" placeholder="Mark Zuck">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for"">Partida </label>
+                <input asp-for="PartidaDestino" type="text" class="form-control" id="" placeholder="Mark Zuck">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for"">Nome destino </label>
+                <input asp-for="NomeDestino" type="text" class="form-control" id="" placeholder="">
+            </div>
+            <div class="form-group col-md-6">
+                <label for"">Hora </label>
+                <input asp-for="HoraDestino" type="text" class="form-control" id="" placeholder="">
+            </div>
+            <div class="form-group col-md-6">
+                <label for"">Data </label>
+                <input asp-for="DataDestina" type="date" class="form-control" id="" placeholder="">
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-outline-dark">Enviar</button>
+
+
+                <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target=".bd-example-modal-lg">Consultar</button>
+
+                
+            </div>
+
+        </div>
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>-->
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h2>Clientes Cadastrados</h2>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>CPF Cliente</th>
+                                        <th>Partida</th>
+                                        <th>Nome destino</th>
+                                        <th>Hora</th>
+                                        <th>Data</th>
+
+                                    </tr>
+                                </thead>
+                                <!--corpo da tabela-->
+                                <tbody>
+                                    <!--inserindo codigo c# no codigo html-->
+                                    @{
+                                        foreach (var destino in Destinos)
+                                        {
+                                            <tr>
+                                                <td>@destino.IdDestino</td>
+                                                <td>@destino.CPFCli</td>
+                                                <td>@destino.PartidaDestino</td>
+                                                <td>@destino.NomeDestino</td>
+                                                <td>@destino.HoraDestino</td>
+                                                <td>@destino.DataDestina</td>
+
+                                            </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>-->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+<!-- fim Cadasatrar Clientes-->
+
+<h2>Atualizar Dados</h2>
+<form asp-controller="Destino" asp-action="Atualizar">
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="">Código do cliente</label>
+            <select class="custom-select" asp-for="IdDestino">
+                <option selected>-- Selecione um código</option>
+                @{
+                    foreach (var destino in Destinos)
+                    {
+                        <option>@destino.IdDestino</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="">CPF cliente</label>
+            <input asp-for="CPFCli" type="text" class="form-control" id="" >
+        </div>
+        <div class="form-group col-md-3">
+            <label for="">Partida</label>
+            <input asp-for="PartidaDestino" type="text" class="form-control" id="" >
+        </div>
+        <div class="form-group col-md-3">
+            <label for="">Nome destino</label>
+            <input asp-for="NomeDestino" type="text" class="form-control" id="">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="">Hora</label>
+            <input asp-for="HoraDestino" type="text" class="form-control" id="">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="">Data</label>
+            <input asp-for="DataDestina" type="date" class="form-control" id="">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-outline-dark>Atualizar</button>
+</form>
+
+
+<h2>Deletar</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>CPF Cliente</th>
+            <th>Partida</th>
+            <th>Nome destino</th>
+            <th>Hora</th>
+            <th>Data</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var destino in Destinos)
+            {
+                <tr>
+                    <td>@destino.IdDestino</td>
+                    <td>@destino.CPFCli</td>
+                    <td>@destino.PartidaDestino</td>
+                    <td>@destino.NomeDestino</td>
+                    <td>@destino.HoraDestino</td>
+                    <td>@destino.DataDestina</td>
+                    <td>
+                        <form asp-controller="Destino" asp-action="Deletar">
+                            <button class="btn btn-danger" type="submit">x deletar</button>
+                            <input asp-for="IdDestino" style="visibility:hidden;" type="text" value="@destino.IdDestino">
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

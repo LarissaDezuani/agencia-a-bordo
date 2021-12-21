@@ -1,0 +1,205 @@
+﻿@model Abordo.Models.Contato;
+@{
+    ViewData["Title"] = "Contato";
+    var Contatos = ViewData["Contatos"] as List<Contato>;
+
+}
+
+<h1>Cadastro Cliente</h1>
+
+
+
+<!--Cadasatrar Clientes-->
+
+<h2>Cadastrar</h2>
+<form asp-action="Index">
+    <div class="shadow-lg  p-3 mb-5 bg-white rounded mx-auto" style=" margin-top: 10%; color: #000; ">
+        <!--msm nome public IActionResult Incluir(Clie-->
+        <div class="form-row">
+
+            <div class="form-group col-md-6">
+                <label for"">Nome Completo</label>
+                <input asp-for="NomeContato" type="text" class="form-control" id="" placeholder="Larissa">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for"">EmailContato </label>
+                <input asp-for="EmailContato" type="text" class="form-control" id="" placeholder="exemplo@gmail.com">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for"">MsgContato </label>
+
+                <textarea asp-for="MsgContato" type="text" class="form-control" rows="5" id="comment"></textarea>
+            </div>
+
+            <div class="">
+                <button type="submit" class="btn btn-outline-dark">Enviar</button>
+                <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target=".bd-example-modal-lg">Consultar</button>
+
+            </div>
+
+        </div>
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>-->
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+
+                        <!--row vai se comportar como uma linha-->
+
+                        <h2>Clientes Cadastrados</h2>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nome</th>
+                                        <th>Email</th>
+                                        <th>Mensagem</th>
+
+                                    </tr>
+                                </thead>
+                                <!--corpo da tabela-->
+                                <tbody>
+                                    <!--inserindo codigo c# no codigo html-->
+                                    @{
+                                        foreach (var contato in Contatos)
+                                        {
+                                            <tr>
+                                                <td>@contato.IdContato</td>
+                                                <td>@contato.NomeContato</td>
+                                                <td>@contato.EmailContato</td>
+                                                <td>@contato.MsgContato</td>
+
+                                            </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</form>
+
+<!-- fim Cadasatrar Clientes-->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>-->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+<h2>Atualizar Dados</h2>
+<form asp-controller="Contato" asp-action="Atualizar">
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="">Código do cliente</label>
+            <select class="custom-select" asp-for="IdContato">
+                <option selected>-- Selecione um código</option>
+                @{
+                    foreach (var contato in Contatos)
+                    {
+                        <option>@contato.IdContato</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="">Nome</label>
+            <input asp-for="NomeContato" type="text" class="form-control" id="">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="">E-mail</label>
+            <input asp-for="EmailContato" type="text" class="form-control" id="">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="">Mensagem</label>
+            <input asp-for="MsgContato" type="text" class="form-control" id="">
+        </div>
+        
+    </div>
+    <button type="submit" class="btn btn-outline-dark">Atualizar</button>
+</form>
+
+
+<h2>Deletar</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Mensagem</th>
+           
+
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var contato in Contatos)
+            {
+                <tr>
+                    <td>@contato.IdContato</td>
+                    <td>@contato.NomeContato</td>
+                    <td>@contato.EmailContato</td>
+                    <td>@contato.MsgContato</td>
+                    
+                    <td>
+                        <form asp-controller="Contato" asp-action="Deletar">
+                            <button class="btn btn-danger" type="submit">x deletar</button>
+                            <input asp-for="IdContato" style="visibility:hidden;" type="text" value="@contato.IdContato">
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
